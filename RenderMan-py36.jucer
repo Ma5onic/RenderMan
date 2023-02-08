@@ -37,8 +37,8 @@
                        libraryPath="/Users/sadkins/opt/anaconda3/envs/spiegelib_env/lib"
                        enablePluginBinaryCopyStep="1" macOSDeploymentTarget="10.9"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="librenderman.so"
-                       osxCompatibility="10.9 SDK" osxArchitecture="Native" headerPath="/usr/local/include&#10;/usr/local/include/python3.6&#10;"
-                       libraryPath="/usr/local/lib&#10;/usr/local/lib/python3.6/lib"
+                       osxCompatibility="10.9 SDK" osxArchitecture="Native" headerPath="/Users/sadkins/opt/anaconda3/envs/spiegelib_env/include&#10;/Users/sadkins/opt/anaconda3/envs/spiegelib_env/include/python3.7m"
+                       libraryPath="/Users/sadkins/opt/anaconda3/envs/spiegelib_env/lib"
                        enablePluginBinaryCopyStep="1" macOSDeploymentTarget="10.9"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
