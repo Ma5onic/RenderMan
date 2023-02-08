@@ -196,7 +196,7 @@
 #endif
 
 #ifndef    JUCE_USE_XSHM
- //#define JUCE_USE_XSHM 1
+ #define   JUCE_USE_XSHM 0
 #endif
 
 #ifndef    JUCE_USE_XRENDER
