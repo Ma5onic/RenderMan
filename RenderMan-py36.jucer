@@ -84,12 +84,15 @@
       </MODULEPATHS>
     </VS2015>
     <LINUX_MAKE targetFolder="Builds/LinuxMakefile" vst3Folder="VST3_SDK" extraCompilerFlags="-fPIC"
-                extraLinkerFlags="-shared -lpython2.7 -lboost_python" cppLanguageStandard="-std=c++11">
+                extraLinkerFlags="-shared -lboost_python37 -undefined dynamic_lookup"
+                cppLanguageStandard="-std=c++11">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="renderman"
-                       headerPath="/usr/include/python2.7"/>
+                       headerPath="/home/ubuntu/anaconda3/envs/spiegelib_env/include&#10;/home/ubuntu/anaconda3/envs/spiegelib_env/include/python3.7m"
+                       libraryPath="/home/ubuntu/anaconda3/envs/spiegelib_env/lib"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="renderman"
-                       headerPath="/usr/include/python2.7"/>
+                       headerPath="/home/ubuntu/anaconda3/envs/spiegelib_env/include&#10;/home/ubuntu/anaconda3/envs/spiegelib_env/include/python3.7m"
+                       libraryPath="/home/ubuntu/anaconda3/envs/spiegelib_env/lib"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
