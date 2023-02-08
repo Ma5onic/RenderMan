@@ -43,7 +43,7 @@ ifeq ($(CONFIG),Debug)
 
   JUCE_CFLAGS += $(JUCE_CPPFLAGS) $(TARGET_ARCH) -fPIC -g -ggdb -O0 -fPIC $(CFLAGS)
   JUCE_CXXFLAGS += $(JUCE_CFLAGS) -std=c++14 $(CXXFLAGS)
-  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/home/ubuntu/anaconda3/envs/spiegelib_env/lib $(shell pkg-config --libs alsa libcurl x11 xinerama xext freetype2) -fvisibility=hidden -shared -lboost_python37 -undefined dynamic_lookup -lrt -ldl -lpthread -lGL $(LDFLAGS)
+  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/home/ubuntu/anaconda3/envs/spiegelib_env/lib $(shell pkg-config --libs alsa libcurl x11 xinerama xext freetype2) -fvisibility=hidden -shared -lboost_python37 -lrt -ldl -lpthread -lGL $(LDFLAGS)
 
   CLEANCMD = rm -rf $(JUCE_OUTDIR)/$(TARGET) $(JUCE_OBJDIR)
 endif
@@ -66,7 +66,7 @@ ifeq ($(CONFIG),Release)
 
   JUCE_CFLAGS += $(JUCE_CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 -fPIC $(CFLAGS)
   JUCE_CXXFLAGS += $(JUCE_CFLAGS) -std=c++14 $(CXXFLAGS)
-  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/home/ubuntu/anaconda3/envs/spiegelib_env/lib $(shell pkg-config --libs alsa libcurl x11 xinerama xext freetype2) -fvisibility=hidden -shared -lboost_python37 -undefined dynamic_lookup -lrt -ldl -lpthread -lGL $(LDFLAGS)
+  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -L/home/ubuntu/anaconda3/envs/spiegelib_env/lib $(shell pkg-config --libs alsa libcurl x11 xinerama xext freetype2) -fvisibility=hidden -shared -lboost_python37 -lrt -ldl -lpthread -lGL $(LDFLAGS)
 
   CLEANCMD = rm -rf $(JUCE_OUTDIR)/$(TARGET) $(JUCE_OBJDIR)
 endif
