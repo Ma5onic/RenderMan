@@ -46,7 +46,7 @@ std::string RenderEngine::getAvailablePluginsXml(const std::string& path) {
 }
 
 
-bool RenderEngine::loadPlugin (const std::string& path, int index)
+bool RenderEngine::loadPlugin (const std::string& path)
 {
     AudioPluginFormatManager pluginFormatManager;
     OwnedArray<PluginDescription> pluginDescriptions;
@@ -56,13 +56,6 @@ bool RenderEngine::loadPlugin (const std::string& path, int index)
     // If there is a problem here first check the preprocessor definitions
     // in the projucer are sensible - is it set up to scan for plugin's?
     jassert (pluginDescriptions.size() > 0);
-
-    if (index >= pluginDescriptions.size()) {
-        std::cout << "RenderEngine::loadPlugin error: plugin index " << index
-        << "provided, but only " << pluginDescriptions.size()
-        << "plugins detected" << std::endl;
-        return false;
-    }
     
     String errorMessage;
 
@@ -71,7 +64,7 @@ bool RenderEngine::loadPlugin (const std::string& path, int index)
         delete plugin;
     }
 
-    plugin = pluginFormatManager.createPluginInstance (*pluginDescriptions[index],
+    plugin = pluginFormatManager.createPluginInstance (*pluginDescriptions[0],
                                                        sampleRate,
                                                        bufferSize,
                                                        errorMessage);
@@ -113,9 +106,8 @@ void RenderEngine::renderPatch (const uint8  midiNote,
     MidiMessage onMessage = MidiMessage::noteOn (1,
                                                  midiNote,
                                                  midiVelocity);
-    onMessage.setTimeStamp(0);
     MidiBuffer midiNoteBuffer;
-    midiNoteBuffer.addEvent (onMessage, onMessage.getTimeStamp());
+    midiNoteBuffer.addEvent (onMessage, 0);
 
     // Setup fft here so it is destroyed when rendering is finished and
     // the stack unwinds so it doesn't share frames with a new patch.
@@ -144,6 +136,10 @@ void RenderEngine::renderPatch (const uint8  midiNote,
 
     for (int i = 0; i < numberOfBuffers; ++i)
     {
+        // Only trigger one note on during first audio buffer
+        if (i > 0)
+            midiNoteBuffer.clear();
+        
         // Trigger note off if in the correct audio buffer.
         ifTimeSetNoteOff (noteLength,
                           sampleRate,
@@ -286,18 +282,20 @@ void RenderEngine::ifTimeSetNoteOff (const double noteLength,
                                      MidiBuffer&  bufferToNoteOff)
 {
     double eventFrame = noteLength * sampleRate;
-    bool bufferBeginIsBeforeEvent = currentBufferIndex * bufferSize < eventFrame;
-    bool bufferEndIsAfterEvent = (currentBufferIndex + 1) * bufferSize >= eventFrame;
+    double bufferStartSample = currentBufferIndex * bufferSize;
+    
+    bool bufferBeginIsBeforeEvent = bufferStartSample < eventFrame;
+    bool bufferEndIsAfterEvent = bufferStartSample + bufferSize >= eventFrame;
     bool noteOffEvent = bufferBeginIsBeforeEvent && bufferEndIsAfterEvent;
+    
     if (noteOffEvent)
     {
-        MidiBuffer midiOffBuffer;
         MidiMessage offMessage = MidiMessage::noteOff (midiChannel,
                                                        midiPitch,
                                                        midiVelocity);
-        offMessage.setTimeStamp(eventFrame);
-        midiOffBuffer.addEvent(offMessage, offMessage.getTimeStamp());
-        bufferToNoteOff = midiOffBuffer;
+        
+        double samplesUntilNoteOff = eventFrame - bufferStartSample;
+        bufferToNoteOff.addEvent(offMessage, samplesUntilNoteOff);
     }
 }
 
@@ -419,9 +417,9 @@ void RenderEngine::fillAvailablePluginParameters (PluginPatch& params)
 }
 
 //==============================================================================
-ParameterNameList RenderEngine::getPluginParametersDescription()
+const String RenderEngine::getPluginParametersDescription()
 {
-    ParameterNameList namedParameters;
+    String parameterListString ("");
 
     if (plugin != nullptr)
     {
@@ -429,10 +427,24 @@ ParameterNameList RenderEngine::getPluginParametersDescription()
 
         for (const auto& pair : pluginParameters)
         {
-            namedParameters.push_back(std::make_pair(pair.first, plugin->getParameterName (pair.first).toStdString()));
+            ss << std::setw (3) << std::setfill (' ') << pair.first;
+
+            const String name = plugin->getParameterName (pair.first);
+            const String index (ss.str());
+
+            parameterListString = parameterListString +
+                                  index + ": " + name + ":" +
+                                  "\n";
+            ss.str ("");
+            ss.clear();
         }
     }
-    return namedParameters;
+    else
+    {
+        std::cout << "Please load the plugin first!" << std::endl;
+    }
+
+    return parameterListString;
 }
 
 //==============================================================================

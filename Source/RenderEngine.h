@@ -61,7 +61,7 @@ public:
                                   KnownPluginList& pluginList
                                   );
 
-    bool loadPlugin (const std::string& path, int index = 0);
+    bool loadPlugin (const std::string& path);
     
     void setPatch (const PluginPatch patch);
 
@@ -83,7 +83,7 @@ public:
 
     const size_t getPluginParameterSize();
 
-    ParameterNameList getPluginParametersDescription();
+    const String getPluginParametersDescription();
 
     bool overridePluginParameter (const int   index,
                                   const float value);

@@ -2,8 +2,8 @@
 
 <JUCERPROJECT id="EHAJpP" name="RenderMan" projectType="dll" version="1.0.0"
               bundleIdentifier="com.yourcompany.RenderMan" includeBinaryInAppConfig="1"
-              jucerVersion="5.3.0" displaySplashScreen="0" reportAppUsage="0"
-              splashScreenColour="Dark" cppLanguageStandard="11" companyCopyright="">
+              displaySplashScreen="1" reportAppUsage="0" splashScreenColour="Dark"
+              companyCopyright="" jucerFormatVersion="1">
   <MAINGROUP id="tONOKg" name="RenderMan">
     <GROUP id="{4A809F36-0B47-21E3-7688-8CF65B68EF74}" name="Maximilian">
       <GROUP id="{581DA4A2-AF43-FE18-47C2-CA1585A8F30E}" name="libs">
@@ -29,22 +29,21 @@
     <FILE id="PqgGm9" name="source.cpp" compile="1" resource="0" file="Source/source.cpp"/>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" vst3Folder="VST3_SDK" extraLinkerFlags="-shared -lpython3.6m -lboost_python3"
-               extraCompilerFlags="-fPIC">
+    <XCODE_MAC targetFolder="Builds/MacOSX" vst3Folder="VST3_SDK" extraLinkerFlags="-shared -lboost_python37 -undefined dynamic_lookup"
+               extraCompilerFlags="-fPIC" vstLegacyFolder="VST3_SDK">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="librenderman.so"
-                       osxCompatibility="10.9 SDK" osxArchitecture="Native" headerPath="/usr/local/include&#10;/usr/local/include/python3.6"
-                       libraryPath="/usr/local/lib&#10;/usr/local/lib/python3.6/lib"
-                       enablePluginBinaryCopyStep="1"/>
+                       osxCompatibility="10.9 SDK" osxArchitecture="Native" headerPath="/Users/sadkins/opt/anaconda3/envs/spiegelib_env/include&#10;/Users/sadkins/opt/anaconda3/envs/spiegelib_env/include/python3.7m"
+                       libraryPath="/Users/sadkins/opt/anaconda3/envs/spiegelib_env/lib"
+                       enablePluginBinaryCopyStep="1" macOSDeploymentTarget="10.9"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="librenderman.so"
-                       osxCompatibility="10.9 SDK" osxArchitecture="Native" headerPath="/usr/local/include&#10;/usr/local/include/python3.6&#10;"
-                       libraryPath="/usr/local/lib&#10;/usr/local/lib/python3.6/lib"
-                       enablePluginBinaryCopyStep="1"/>
+                       osxCompatibility="10.9 SDK" osxArchitecture="Native" headerPath="/Users/sadkins/opt/anaconda3/envs/spiegelib_env/include&#10;/Users/sadkins/opt/anaconda3/envs/spiegelib_env/include/python3.7m"
+                       libraryPath="/Users/sadkins/opt/anaconda3/envs/spiegelib_env/lib"
+                       enablePluginBinaryCopyStep="1" macOSDeploymentTarget="10.9"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
@@ -55,6 +54,7 @@
         <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <VS2015 targetFolder="Builds/VisualStudio2015" vst3Folder="VST3_SDK"
@@ -70,7 +70,6 @@
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
@@ -81,46 +80,22 @@
         <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </VS2015>
-    <VS2013 targetFolder="Builds/VisualStudio2013" vst3Folder="VST3_SDK"
-            windowsTargetPlatformVersion="8.1">
-      <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
-                       isDebug="1" optimisation="1" targetName="renderman" debugInformationFormat="ProgramDatabase"
-                       enablePluginBinaryCopyStep="0"/>
-        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
-                       isDebug="0" optimisation="3" targetName="renderman" debugInformationFormat="ProgramDatabase"
-                       enablePluginBinaryCopyStep="0" linkTimeOptimisation="1"/>
-      </CONFIGURATIONS>
-      <MODULEPATHS>
-        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_cryptography" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_video" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_opengl" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_audio_basics" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
-      </MODULEPATHS>
-    </VS2013>
     <LINUX_MAKE targetFolder="Builds/LinuxMakefile" vst3Folder="VST3_SDK" extraCompilerFlags="-fPIC"
-                extraLinkerFlags="-shared -lpython2.7 -lboost_python" cppLanguageStandard="-std=c++11">
+                extraLinkerFlags="-shared -lboost_python37" cppLanguageStandard="-std=c++11">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="renderman"
-                       headerPath="/usr/include/python2.7"/>
+                       headerPath="/home/ubuntu/anaconda3/envs/spiegelib_env/include&#10;/home/ubuntu/anaconda3/envs/spiegelib_env/include/python3.7m"
+                       libraryPath="/home/ubuntu/anaconda3/envs/spiegelib_env/lib"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="renderman"
-                       headerPath="/usr/include/python2.7"/>
+                       headerPath="/home/ubuntu/anaconda3/envs/spiegelib_env/include&#10;/home/ubuntu/anaconda3/envs/spiegelib_env/include/python3.7m"
+                       libraryPath="/home/ubuntu/anaconda3/envs/spiegelib_env/lib"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
-        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
@@ -131,6 +106,7 @@
         <MODULEPATH id="juce_audio_devices" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_audio_formats" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_audio_processors" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
@@ -150,7 +126,7 @@
     <MODULE id="juce_video" showAllCode="1" useLocalCopy="1" useGlobalPath="0"/>
   </MODULES>
   <JUCEOPTIONS JUCE_PLUGINHOST_VST="1" JUCE_PLUGINHOST_VST3="1" JUCE_PLUGINHOST_AU="1"
-               JUCE_CHECK_MEMORY_LEAKS="0" JUCE_WEB_BROWSER="0"/>
+               JUCE_CHECK_MEMORY_LEAKS="0" JUCE_WEB_BROWSER="0" JUCE_USE_XSHM="0"/>
   <LIVE_SETTINGS>
     <LINUX/>
     <OSX/>
